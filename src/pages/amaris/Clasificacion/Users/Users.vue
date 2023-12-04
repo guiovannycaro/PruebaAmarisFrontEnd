@@ -23,7 +23,7 @@
         <div class="tw-flex tw-full q-col-gutter-md">
           <div class="tw-w-1/4">
             <p class="tw-text-label">Códe User</p>
-            <q-input outlined v-model="filtersSearch.userId" :options="options" label="Codigo Usuar" dense/>
+            <q-input outlined v-model="camposSearch.userId" :options="options" label="Codigo Usuar" dense/>
           </div>
         </div>
 
@@ -135,33 +135,24 @@ const camposSearch: Ref<Filtros> = ref({
 });
 
 const d = onMounted   (async() =>{
- response = await service.UsersListar();
-console.log(response)
+ const posts = await service.UsersListar();
+console.log(posts)
 
 
-        data.value = response.map((item)=>({
-            ...item,
-               id:item.iduser
-            })
-           )
+        data.value = posts
+
 })
 
 const Buscar = async (e: any) => {
    e.preventDefault();
-   const datos  = await service.UsersSearchId(
-    camposSearch.value
+   console.log(camposSearch.value);
+   const datos  = await service.UsersSearchId(camposSearch.value);
 
-    );
+   console.log(datos)
 
 
 
-if(datos.length == 0){
-  showModal.value = true
-}else{
-  data.value = datos;
-      loadTable.value ++
 
-}
 
 }
 

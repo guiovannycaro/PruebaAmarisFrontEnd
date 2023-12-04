@@ -1,6 +1,6 @@
 import Api from './Api';
 import jwt_decode from 'jwt-decode';
-import axios from 'axios';
+import { api } from 'boot/axios';
 import { Ref, ref } from 'vue';
 
 interface Filters {
@@ -30,9 +30,9 @@ export default {
   async EmployeeListar(): Promise<any> {
     try {
       console.log('Listar Employee');
-      const url = 'localhost:8080/amaris/Servicio/Employee/listEmployee';
+      const url = '/amaris/Servicio/Employee/listEmployee';
       console.log('url');
-      const { data } = await axios.get(url);
+      const { data } = await api.get(url);
       return data;
     } catch (error: any) {
       console.error('Error logging in:', error.message);
@@ -50,10 +50,10 @@ export default {
 
       console.log('Insertar Employee');
 
-      const url = 'localhost:8080/amaris/Servicio/Employee/';
+      const url = '/amaris/Servicio/Employee/';
       console.log('url');
       const baseURL = url + 'addEmployee/';
-      const data = await axios.post(baseURL, radicadoJson, { headers });
+      const data = await api.post(baseURL, radicadoJson, { headers });
       console.log(data);
       return data;
     } catch (error: any) {
@@ -71,11 +71,11 @@ export default {
       };
 
       console.log('Actualizar Employee');
-      const url = 'localhost:8080/amaris/Servicio/Employee/';
+      const url = '/amaris/Servicio/Employee/';
       console.log('url');
       const baseURL = url + 'editEmployee/';
 
-      const { data } = await axios.post(baseURL, radicadoJson, { headers });
+      const { data } = await api.post(baseURL, radicadoJson, { headers });
 
       console.log(data);
       return data;
@@ -95,11 +95,11 @@ export default {
       };
 
       console.log('Buscar  Dependencia Por Id');
-      const url = 'localhost:8080/amaris/Servicio/Employee/';
+      const url = '/amaris/Servicio/Employee/';
       console.log('url');
       const baseURL = url + 'listEmployeeById/';
 
-      const { data } = await axios.post(baseURL, radicadoJson, { headers });
+      const { data } = await api.post(baseURL, radicadoJson, { headers });
 
       console.log(data);
       return data;

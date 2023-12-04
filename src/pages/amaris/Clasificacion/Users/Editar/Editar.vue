@@ -184,7 +184,7 @@ console.log(route.params);
 
 
 const filtersSearch: Ref<Filters> = ref({
-  iduser: 0,
+  iduser: Number(route.params.id),
   userId: 0,
   id: 0,
   title: "",
@@ -235,7 +235,7 @@ const regresar = (e: any) => {
 }
 
 const d = onMounted   (async() =>{
-  let data = await service.UsersSearchId({ "iduser": filtersSearch.value.iduser});
+  let data = await service.UsersSearchId(filtersSearch.value);
   console.log('**************0');
   console.log(data);
   console.log('**************0');

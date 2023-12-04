@@ -1,6 +1,6 @@
 import Api from './Api';
 import jwt_decode from 'jwt-decode';
-import axios from 'axios';
+import { api } from 'boot/axios';
 import { Ref, ref } from 'vue';
 
 interface Filters {
@@ -27,20 +27,20 @@ export default {
 
   async UsersListar(): Promise<any> {
     try {
+
+      const headers = {
+        'Access-Control-Allow-Origin': '*',
+        accept: 'application/json',
+        'Content-Type': 'application/json',
+      };
+
+
       console.log('Listar Usuarios');
-      const url = 'localhost:8080/amaris/Servicio/Users/listUser';
+      const url = '/amaris/Servicio/Users/listUser';
 
       console.log('url');
 
-      var axios = require("axios");
-
-      const axiosInstance = axios.create({
-        headers: {
-          "Access-Control-Allow-Origin": "*"
-        }
-      });
-
-      const { data } = await axiosInstance.get(url);
+      const { data } = await api.get(url, { headers });
       return data;
     } catch (error: any) {
 
@@ -58,14 +58,14 @@ export default {
 
       console.log('Insertar Users');
 
-      const url = 'localhost:8080/amaris/Servicio/Users/';
+      const url = '/amaris/Servicio/Users/';
       console.log('url');
       const baseURL = url + 'addUser/';
 
 
 
 
-      const data = await axios.post(baseURL, radicadoJson, { headers });
+      const data = await api.post(baseURL, radicadoJson, { headers });
       console.log(data);
       return data;
     } catch (error: any) {
@@ -83,14 +83,12 @@ export default {
       };
 
       console.log('Actualizar Users');
-      const url = 'localhost:8080/amaris/Servicio/Users/';
+      const url = '/amaris/Servicio/Users/';
       console.log('url');
       const baseURL = url + 'editUser/';
 
 
-
-
-      const { data } = await axios.post(baseURL, radicadoJson, { headers });
+      const { data } = await api.post(baseURL, radicadoJson, { headers });
 
       console.log(data);
       return data;
@@ -109,16 +107,16 @@ export default {
         'Content-Type': 'application/json',
       };
 
-      console.log('Buscar  Dependencia Por Id');
-      const url = 'localhost:8080/amaris/Servicio/Users/';
-      console.log('url');
-      const baseURL = url + 'istUserById/';
+      console.log('Buscar  usuarios Por Id');
+      const url = '/amaris/Servicio/Users/';
+
+      const baseURL = url + 'listUserById/';
+      console.log('esta es la info que se envia ' + radicadoJson);
 
 
+      const { data } = await api.get(baseURL, radicadoJson, { headers });
 
-      const { data } = await axios.post(baseURL, radicadoJson, { headers });
-
-      console.log(data);
+      console.log('estos son los datos de la busqueda ' + data);
       return data;
     } catch (error: any) {
       console.error('Error logging in:', error.message);

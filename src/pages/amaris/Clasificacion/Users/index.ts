@@ -3,32 +3,32 @@ export const SUBSERIES_HEADER = [
     name: 'iduser',
     align: 'center',
     label: 'Códe User',
-    field: 'descripcion',
+    field: 'iduser',
   },
   {
     name: 'userId',
     align: 'center',
     label: 'Códe Service',
-    field: 'termino',
+    field: 'userId',
   },
   {
     name: 'id',
     align: 'center',
     label: 'Id',
-    field: 'radicado',
+    field: 'id',
   },
   {
     name: 'title',
     align: 'center',
     label: 'Title',
-    field: 'estado',
+    field: 'title',
   },
 
   {
     name: 'body',
     align: 'center',
     label: 'Body',
-    field: 'estado',
+    field: 'body',
   },
   {
     name: 'acciones',
